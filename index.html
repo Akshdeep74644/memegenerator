@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page</title>
+  <style>
+    *{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url(hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container{
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container .title{
+  font-size: 3rem;
+  letter-spacing: 1px;
+}
+
+.container #imager{
+  width: 250px;
+  border-radius: 10px;
+  background-size: cover;
+}
+
+.container #meme-title{
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.container #mbtn{
+  height: 30px;
+  width: 70%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: rgb(255, 179, 0);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+     <div class="container">
+    <h2 class="title">Meme Maker</h2>
+    <img src="#" alt="Meme Imager" id="imager"  />
+    <p id="meme-title">Meme Title</p>
+    <button id="mbtn">Click It</button>
+  </div>
+
+  <script>
+    let url = 'https://api.imgflip.com/get_memes'
+let btn = document.getElementById('mbtn')
+fetch(url).then((response) => response.json())
+.then((data)=>{
+  btn.addEventListener('click', ()=>{
+    let memeTitle = document.getElementById('meme-title')
+    let memeimg = document.getElementById('imager')
+    let meme = data.data;
+    let memess = meme.memes;
+    let randommeme = memess[Math.floor(Math.random() * memess.length)];
+    memeTitle.innerHTML = randommeme.name;
+    memeimg.src = randommeme.url;
+    console.log(randommeme)
+});
+
+});
+
+  </script>
+</body>
+</html>
